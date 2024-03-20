@@ -23,7 +23,7 @@
 #     https://github.com/keycloak/keycloak/blob/main/pom.xml#L95
 #     https://repo.maven.apache.org/maven2/com/h2database/h2/2.2.224/h2-2.2.224.jar
 #     Generic H2 (Embedded)
-#     JDBC URL:       jdbc:h2:tcp://localhost/C:/Zimmermann/volumes/keycloak/h2/keycloakdb
+#     JDBC URL:       jdbc:h2:tcp://localhost//Users/marius/volumes/keycloak/h2/keycloakdb
 #     Benutzername:   sa
 #     Passwort:       password
 #         Tabellen: USER_ENTITY, USER_ROLE_MAPPING, ...
@@ -39,7 +39,7 @@ services:
         target: 8443
     volumes:
       - type: bind
-        source: C:/Zimmermann/volumes/keycloak
+        source: /Users/marius/volumes/keycloak
         # mit Unterverzeichnis h2
         target: /opt/keycloak/data
       - type: bind

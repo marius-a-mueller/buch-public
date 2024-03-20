@@ -34,14 +34,14 @@ services:
         target: 5500
     volumes:
       - type: bind
-        source: C:/Zimmermann/volumes/oracle/oradata
+        source: /Users/marius/volumes/oracle/oradata
         target: /opt/oracle/oradata
       - type: bind
-        source: C:/Zimmermann/volumes/oracle/sql
+        source: /Users/marius/volumes/oracle/sql
         target: /sql
         read_only: true
       - type: bind
-        source: C:/Zimmermann/volumes/oracle/csv/buch
+        source: /Users/marius/volumes/oracle/csv/buch
         target: /csv
     env_file: .env
     # user: oracle:oinstall

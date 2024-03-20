@@ -28,13 +28,13 @@ services:
         target: 9092
     volumes:
       - type: bind
-        source: C:/Zimmermann/volumes/sonarqube/data
+        source: /Users/marius/volumes/sonarqube/data
         target: /opt/sonarqube/data
       - type: bind
-        source: C:/Zimmermann/volumes/sonarqube/logs
+        source: /Users/marius/volumes/sonarqube/logs
         target: /opt/sonarqube/logs
       - type: bind
-        source: C:/Zimmermann/volumes/sonarqube/extensions
+        source: /Users/marius/volumes/sonarqube/extensions
         target: /opt/sonarqube/lib/extensions
         read_only: true
     env_file: .env
