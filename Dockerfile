@@ -63,15 +63,24 @@ USER node
 
 WORKDIR /home/node
 
-COPY src ./src
+# COPY statt --mount=type=bound wegen Rechte-Problemen
+COPY --chown=node:node src ./src
+COPY --chown=node:node package.json package.json
+COPY --chown=node:node package-lock.json package-lock.json
+COPY --chown=node:node nest-cli.json nest-cli.json
+COPY --chown=node:node tsconfig.json tsconfig.json
+COPY --chown=node:node tsconfig.build.json tsconfig.build.json
+RUN echo $(ls -la)
+RUN --mount=type=cache,target=/root/.npm
 
 # https://docs.docker.com/engine/reference/builder/#run---mounttypebind
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=bind,source=nest-cli.json,target=nest-cli.json \
-    --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
-    --mount=type=bind,source=tsconfig.build.json,target=tsconfig.build.json \
-    --mount=type=cache,target=/root/.npm <<EOF
+# RUN --mount=type=bind,source=package.json,target=package.json \
+#  --mount=type=bind,source=package-lock.json,target=package-lock.json \
+#  --mount=type=bind,source=nest-cli.json,target=nest-cli.json \
+#  --mount=type=bind,source=tsconfig.json,target=tsconfig.json \
+#  --mount=type=bind,source=tsconfig.build.json,target=tsconfig.build.json \
+#  --mount=type=cache,target=/root/.npm <<EOF
+RUN <<EOF
 set -eux
 # ci (= clean install) mit package-lock.json
 npm ci --no-audit --no-fund
@@ -97,9 +106,14 @@ USER node
 
 WORKDIR /home/node
 
-RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-    --mount=type=cache,target=/root/.npm <<EOF
+COPY --chown=node:node package.json package.json
+COPY --chown=node:node package-lock.json package-lock.json
+RUN --mount=type=cache,target=/root/.npm
+
+#RUN --mount=type=bind,source=package.json,target=package.json \
+#    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+#    --mount=type=cache,target=/root/.npm <<EOF
+RUN <<EOF
 set -eux
 # ci (= clean install) mit package-lock.json
 # --omit=dev: ohne devDependencies

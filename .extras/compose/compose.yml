@@ -35,8 +35,8 @@ include:
   - path: ./db/postgres/compose.yml
   #- path: ./db/mysql/compose.yml
   #- path: ./db/oracle/compose.yml
-  - path: ./keycloak/compose.yml
-  - path: ./fakesmtp/compose.yml
+  #- path: ./keycloak/compose.yml
+  #- path: ./fakesmtp/compose.yml
 
 # https://docs.docker.com/compose/compose-file/05-services
 services:
@@ -61,10 +61,10 @@ services:
         source: ../../src/config/resources/tls/key.pem
         target: /opt/app/dist/config/resources/tls/key.pem
         read_only: true
-      - type: bind
-        source: ../../src/config/resources/jwt/private-key.pem
-        target: /opt/app/dist/config/resources/jwt/private-key.pem
-        read_only: true
+#      - type: bind
+#        source: ../../src/config/resources/jwt/private-key.pem
+#        target: /opt/app/dist/config/resources/jwt/private-key.pem
+#        read_only: true
       - type: bind
         source: ../../src/config/resources/db/sqlite/buch.sqlite
         target: /opt/app/dist/config/resources/db/sqlite/buch.sqlite
