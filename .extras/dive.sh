@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Aufruf:   ./dive.sh [distroless|wolfi]
 base=$1
 if [[ -n $base && $base != 'distroless' && $base != 'wolfi' && $base != 'bookworm' ]]; then
